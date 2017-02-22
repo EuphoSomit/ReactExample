@@ -14,17 +14,29 @@ class Product extends Component {
     
     
     componentDidMount() {
+	//Wrong way, try not to put props in state
         this.setState({
           productName: this.props.params.productId
         });
     }
     
     componentWillReceiveProps(nextProps){
+	console.log("Passing Props");
         if(nextProps.params.productId !== this.props.params.productId){
+	    console.log("Passing Props check");
             this.setState({
-               productName: nextProps.params.productId
+              productName: nextProps.params.productId
             }); 
         }
+    }
+
+    shouldComponentUpdate(nextProps,nextState){
+
+	//if(nextProps.params.productId !== this.props.params.productId){
+	  //return true; 
+        //}else{
+	  //return false;
+	//}
     }
     
     handleAdd(e) {
@@ -33,9 +45,11 @@ class Product extends Component {
     }
     
     render() {
+	console.log("Render when state change");
     return (
         <div>
-            <h2>{this.state.productName}</h2>
+            <h2>{this.state.productName}{/*this.props.params.productId*/}</h2>
+	    <h3>Controlled Component</h3>
             <input type="text" name="name" value={this.state.name} onChange={e => this.setState({ name: e.target.value })}></input>
             <button onClick={this.handleAdd}>Add</button>
         </div>          

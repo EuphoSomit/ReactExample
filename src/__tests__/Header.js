@@ -7,3 +7,8 @@ it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<Header />, div);
 });
+
+it('Class of rendered table', () => {
+  const header = shallow(<Header />);
+  expect(header.find('div').first().hasClass('App-header'));
+});
